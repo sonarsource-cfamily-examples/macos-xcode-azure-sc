@@ -1,3 +1,56 @@
+= C++ example project scanned on SonarCloud using Azure Pipelines
+// URIs:
+:uri-qg-status: https://sonarcloud.io/dashboard?id=sc-sq-c-family-examples_macos-xcode-azure-sc
+:img-qg-status: https://sonarcloud.io/api/project_badges/measure?project=sc-sq-c-family-examples_macos-xcode-azure-sc&metric=alert_status
+:uri-build-status: https://dev.azure.com/sc-sq-c-family-examples/macos-xcode-azure-sc/_build/latest?definitionId=2
+:img-build-status: https://dev.azure.com/sc-sq-c-family-examples/macos-xcode-azure-sc/_apis/build/status/sc-sq-c-family-examples.macos-xcode-azure-sc
+
+image:{img-build-status}[Build Status, link={uri-build-status}]
+image:{img-qg-status}[Quality Gate Status,link={uri-qg-status}]
+
+*This project is analysed on https://sonarcloud.io/dashboard?id=sc-sq-c-family-examples_macos-xcode-azure-sc[SonarCloud]!*
+
+It is very easy to analyze a C/C++/Objective-C project with SonarCloud https://sonarcloud.io/documentation/getting-started/azure-devops/[on Azure DevOps]:
+
+. Create a `sonar-project.properties` file to store your configuration
+. Install SonarCloud extension for your organization:
+.. Open Organization settings (in the bottom left corner of organizations view)
+.. Open "Extensions" page (in the General category)
+.. Press "Browse marketplace" and find "SonarCloud"
+.. Select your organization and click "Install"
+. Add the SonarCloud connection to your project:
+.. Open Project settings (in the bottom left corner of project page)
+.. Open "Service connections" page (in the Pipelines category)
+.. Press "New connection" and select the "SonarCloud"
+.. Fill in the `SONAR_TOKEN`
+.. Name your connection `SonarCloud` (to reference it later in `azure-pipelines.yml`)
+. In your `azure-pipelines.yml` file:
+.. Add the `SonarCloudPrepare` task and configure it:
+* Specify the `SonarCloud Service Endpoint` as `SonarCloud` - the connection you created earlier
+* Choose your `organization`
+* Choose "Use standalone scanner" (`scannerMode: 'CLI'`)
+* Choose "Store configuration with my source code (sonar-project.properties)" (`configMode: 'file'`)
+.. Add a task to download the https://docs.sonarqube.org/latest/analysis/languages/cfamily/#header-4[Build Wrapper]
+.. Wrap your compilation with the Build Wrapper
+.. Add the `SonarCloudAnalyze` task
+
+You can take a look at the link:sonar-project.properties[sonar-project.properties] and link:azure-pipelines.yml[azure-pipelines.yml] to see it in practice.
+
+= Documentation
+
+- https://docs.sonarqube.org/latest/analysis/languages/cfamily/[Documentation of the C/C++/Objective-C plugin and its Build Wrapper]
+- https://sonarcloud.io/documentation/getting-started/azure-devops/[Documentation of using SonarCloud with Azure DevOps]
+
+== Warnings
+
+The following warning may appear during invocation of `/build-wrapper-macosx-x86`. To best of our knowledge does not affect the result of the analysis:
+----
+dyld: warning: could not load inserted library '/Users/runner/.sonar/build-wrapper-macosx-x86/libinterceptor.dylib' into hardened process because no suitable image found.  Did find:
+	/Users/runner/.sonar/build-wrapper-macosx-x86/libinterceptor.dylib: code signature in (/Users/runner/.sonar/build-wrapper-macosx-x86/libinterceptor.dylib) not valid for use in process using Library Validation: mapped file has no cdhash, completely unsigned? Code has to be at least ad-hoc signed.
+----
+For details please reffer to following https://jira.sonarsource.com/browse/CPP-1640[ticket] and https://community.sonarsource.com/t/dyld-warning-could-not-load-inserted-library-applications-sonar-scanner-bin-libinterceptor-dylib-into-hardened-process-because-no-suitable-image-found/1806[community thread].
+
+
 = MacOS\XCodeBuild
 
 A build of the https://github.com/sc-sq-c-family-examples/code[code repository] on a MacOS using XCode build system.
