@@ -8,10 +8,10 @@
 image:{img-build-status}[Build Status, link={uri-build-status}]
 image:{img-qg-status}[Quality Gate Status,link={uri-qg-status}]
 
+*This project is analysed on https://sonarcloud.io/dashboard?id=sonarsource-cfamily-examples_macos-xcode-azure-sc[SonarCloud]!*
+
 :note-caption: :information_source:
 NOTE: This simple example ignores https://sonarcloud.io/documentation/analysis/languages/cfamily/#analysis-cache[analysis cache] and https://sonarcloud.io/documentation/analysis/languages/cfamily/#multithreaded-code-scan[multithreaded execution] both of which can boost analysis significantly.
-
-*This project is analysed on https://sonarcloud.io/dashboard?id=sonarsource-cfamily-examples_macos-xcode-azure-sc[SonarCloud]!*
 
 It is very easy to analyze a C, C++ and Objective-C project with SonarCloud https://sonarcloud.io/documentation/getting-started/azure-devops/[on Azure DevOps]:
 
