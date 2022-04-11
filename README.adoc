@@ -33,7 +33,7 @@ It is very easy to analyze a C, C++ and Objective-C project with SonarCloud http
 * Choose your `organization`
 * Choose "Use standalone scanner" (`scannerMode: 'CLI'`)
 * Choose "Store configuration with my source code (sonar-project.properties)" (`configMode: 'file'`)
-.. Add a task to download the https://docs.sonarqube.org/latest/analysis/languages/cfamily/#header-4[Build Wrapper]
+.. Add a task to download the https://docs.sonarcloud.io/advanced-setup/languages/c-c-objective-c/#analysis-steps-using-build-wrapper[Build Wrapper]
 .. Wrap your compilation with the Build Wrapper
 .. Add the `SonarCloudAnalyze` task
 
