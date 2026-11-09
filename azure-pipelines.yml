@@ -22,9 +22,6 @@ jobs:
       build-wrapper-macosx-x86 --out-dir build_wrapper_output_directory xcodebuild
     workingDirectory: .
     displayName: Build in build-wrapper
-  - task: JavaToolInstaller@0
-    inputs:
-      versionSpec: '21'
-      jdkArchitectureOption: 'x64'
-      jdkSourceOption: 'PreInstalled'
   - task: SonarCloudAnalyze@1
+    inputs:
+      jdkversion: 'JAVA_HOME_21_X64'
