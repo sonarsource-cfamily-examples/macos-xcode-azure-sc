@@ -6,11 +6,11 @@ jobs:
   variables:
     BUILD_WRAPPER_DOWNLOAD_URL: https://sonarcloud.io/static/cpp/build-wrapper-macosx-x86.zip
   steps:
-  - task: SonarCloudPrepare@1
+  - task: SonarCloudPrepare@4
     inputs:
       SonarCloud: 'SonarCloud' # Name of the SonarCloud service connection you created
       organization: 'sonarsource-cfamily-examples'
-      scannerMode: 'CLI'
+      scannerMode: 'cli'
       configMode: 'file'
   - bash: |
       mkdir -p $HOME/.sonar
@@ -22,6 +22,6 @@ jobs:
       build-wrapper-macosx-x86 --out-dir build_wrapper_output_directory xcodebuild
     workingDirectory: .
     displayName: Build in build-wrapper
-  - task: SonarCloudAnalyze@1
+  - task: SonarCloudAnalyze@4
     inputs:
       jdkversion: 'JAVA_HOME_21_X64'
